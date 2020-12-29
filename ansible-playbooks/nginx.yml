@@ -1,0 +1,17 @@
+---
+- name: Install and start nginx on an Azure VM
+  hosts: all
+  become: yes
+  tasks:
+  - name: install nginx
+    apt:
+      pkg: nginx
+      state: present
+    notify:
+    - start nginx
+
+  handlers:
+  - name: start nginx
+    service:
+      name: nginx
+      state: started
